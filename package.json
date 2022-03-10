@@ -9,10 +9,12 @@
     "lint": "eslint \"**/*.{vue,ts,js}\""
   },
   "dependencies": {
+    "@vueuse/core": "^7.7.1",
     "vue": "^3.2.25"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.18.3",
+    "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^2.2.0",
     "eslint": "^8.10.0",
     "naive-ui": "^2.26.3",

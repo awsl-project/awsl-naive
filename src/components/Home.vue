@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { NButton } from 'naive-ui'
-
+import { NLayout, NSpace } from 'naive-ui'
+import Header from './Header.vue'
 </script>
 
 <template>
-  <NButton>Awsl Naive</NButton>
+  <NSpace>
+    <NLayout>
+      <Header />
+    </NLayout>
+  </NSpace>
 </template>
