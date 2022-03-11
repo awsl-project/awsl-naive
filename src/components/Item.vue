@@ -32,11 +32,3 @@ defineProps<{ itemProps: ImageProps }>()
     </template>
   </n-card>
 </template>
-
-<style scoped>
-.card{
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-</style>
