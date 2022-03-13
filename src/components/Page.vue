@@ -13,6 +13,7 @@ import {
 import type { SelectOption } from 'naive-ui'
 import {
   AddOutline,
+  ArrowDownCircleOutline,
   EnterOutline,
   MoonOutline,
   RocketOutline,
@@ -76,6 +77,11 @@ function handleAddProducer() {
 function handleFetchList() {
   getList(currentProducer.value!).then((res) => {
     imageList.value = res
+  })
+}
+function handleLoadMore() {
+  getList(currentProducer.value!, imageList.value.length).then((res) => {
+    imageList.value = imageList.value.concat(res)
   })
 }
 </script>
@@ -157,6 +163,24 @@ function handleFetchList() {
         </n-empty>
       </div>
     </n-layout-content>
+    <n-layout-footer>
+      <div class="loadmore">
+        <n-button @click="handleLoadMore">
+          <template #icon>
+            <n-icon :component="ArrowDownCircleOutline" />
+          </template>
+          还要更多
+        </n-button>
+      </div>
+    </n-layout-footer>
     <n-back-top :right="50" />
   </NLayout>
 </template>
+
+<style>
+.loadmore{
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+}
+</style>
