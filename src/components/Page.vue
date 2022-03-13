@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  NBackTop,
   NButton,
   NButtonGroup,
   NGrid,
@@ -157,5 +158,6 @@ function handleFetchList() {
         </n-empty>
       </div>
     </n-layout-content>
+    <n-back-top :right="50" />
   </NLayout>
 </template>
