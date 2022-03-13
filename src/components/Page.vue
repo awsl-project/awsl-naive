@@ -33,6 +33,7 @@ const producerOptions = ref<SelectOption[]>([])
 
 const imageList = ref<Picture[]>([])
 
+const limit = 20
 onMounted(() => {
   getProducers().then((res) => {
     producers.value = res
@@ -80,7 +81,7 @@ function handleFetchList() {
   })
 }
 function handleLoadMore() {
-  getList(currentProducer.value!, imageList.value.length).then((res) => {
+  getList(currentProducer.value!, limit, imageList.value.length).then((res) => {
     imageList.value = imageList.value.concat(res)
   })
 }
