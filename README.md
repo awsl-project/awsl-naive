@@ -12,7 +12,8 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 
 ## Dev
 ```bash
-git clone git@github.com:Sepush/awsl-naive.git
+git clone git@github.com:awsl-project/awsl-naive.git
+cd awsl-naive
 pnpm i
 pnpm dev
 ```
