@@ -146,25 +146,16 @@ function handleLoadMore() {
       </n-modal>
     </n-layout-header>
     <n-layout-content>
-      <n-grid v-if="imageList.length" cols="2 s:3 m:4 l:5 xl:6 2xl:7" x-gap="3" y-gap="4" responsive="screen">
+      <n-grid v-if="imageList.length!==0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" x-gap="3" y-gap="4" responsive="screen">
         <n-grid-item v-for="pic in imageList" :key="pic.pic_id">
           <Pic :pic-props="pic" />
         </n-grid-item>
       </n-grid>
       <div v-else>
-        <n-empty description="😍瑟即是空呢">
-          <template #extra>
-            <n-button round>
-              <template #icon>
-                <n-icon :component="RocketOutline" />
-              </template>
-              冲鸭
-            </n-button>
-          </template>
-        </n-empty>
+        <n-empty description="😍瑟即是空呢" />
       </div>
     </n-layout-content>
-    <n-layout-footer>
+    <n-layout-footer v-if="imageList.length!==0">
       <div class="loadmore">
         <n-button @click="handleLoadMore">
           <template #icon>
