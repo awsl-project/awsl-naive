@@ -16,7 +16,6 @@ import {
   EnterOutline,
   MoonOutline,
   RocketOutline,
-  SearchOutline,
   SunnyOutline,
 } from '@vicons/ionicons5'
 import { onMounted, ref, watch } from 'vue'

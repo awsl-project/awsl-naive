@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { NButton, NCard, NIcon, NImage } from 'naive-ui'
-import type { ImageProps } from 'naive-ui'
 import { WeiboOutlined } from '@vicons/antd'
 import type { PicInfo, Picture } from '../types'
 
 defineProps<{ picProps: Picture }>()
+
+const footerStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
 </script>
 
 <template>
-  <n-card segmented>
+  <n-card segmented :footer-style="footerStyle">
     <template #cover>
       <n-image
         :src="picProps.pic_info.original?.url"
