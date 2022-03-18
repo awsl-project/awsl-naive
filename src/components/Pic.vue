@@ -16,7 +16,8 @@ const footerStyle = {
   <n-card segmented :footer-style="footerStyle">
     <template #cover>
       <n-image
-        :src="picProps.pic_info.original?.url"
+        :preview-src="picProps.pic_info.original.url "
+        :src="picProps.pic_info.large.url"
       />
     </template>
     <template #footer>

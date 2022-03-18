@@ -18,6 +18,8 @@ export interface Picture{
   pic_id: string
   wb_url: string
   pic_info: {
+    thumbnail?: PicInfo
+    bmiddle?: PicInfo
     large: PicInfo
     original: PicInfo
     mw2000: PicInfo
