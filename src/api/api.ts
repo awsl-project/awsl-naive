@@ -26,9 +26,9 @@ export async function setProducers(producer: ProducerAdd) {
     return data.value
 }
 
-export async function getList(uid: string, limit?: number, offset?: number) {
+export async function getList(uid?: string, limit?: number, offset?: number) {
   const { data, onFetchError } = await useFetch<PicInfo[]>(
-    `${baseUrl}/v2/list?uid=${uid}&limit=${limit ?? 10}&offset=${offset ?? 0}`,
+    `${baseUrl}/v2/list?uid=${uid ?? ''}&limit=${limit ?? 10}&offset=${offset ?? 0}`,
   ).get().json()
   onFetchError(handleFetchError)
   if (data !== null)

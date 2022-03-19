@@ -27,27 +27,13 @@ import Pic from './Pic.vue'
 const message = useMessage()
 
 const producers = ref<Producer[]>([])
-const currentProducer = ref<string|null>(null)
+const currentProducer = ref<string|undefined>(undefined)
 const producerOptions = ref<SelectOption[]>([])
 
 const imageList = ref<Picture[]>([])
 
 const limit = 20
-onMounted(() => {
-  getProducers().then((res) => {
-    producers.value = res
-  })
-})
 
-watch(
-  () => producers.value.length,
-  () => {
-    producerOptions.value = producers.value.map(producer => ({
-      label: producer.name,
-      value: producer.uid,
-    }))
-  },
-)
 function handleFetch() {
   getProducers().then((res) => {
     producers.value = res
@@ -75,15 +61,32 @@ function handleAddProducer() {
   showModal.value = false
 }
 function handleFetchList() {
-  getList(currentProducer.value!).then((res) => {
+  getList(currentProducer.value).then((res) => {
     imageList.value = res
   })
 }
 function handleLoadMore() {
-  getList(currentProducer.value!, limit, imageList.value.length).then((res) => {
+  getList(currentProducer.value, limit, imageList.value.length).then((res) => {
     imageList.value = imageList.value.concat(res)
   })
 }
+
+onMounted(() => {
+  getProducers().then((res) => {
+    producers.value = res
+  })
+  handleFetchList()
+})
+
+watch(
+  () => producers.value.length,
+  () => {
+    producerOptions.value = producers.value.map(producer => ({
+      label: producer.name,
+      value: producer.uid,
+    }))
+  },
+)
 </script>
 
 <template>
