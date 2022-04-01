@@ -20,61 +20,51 @@ import {
 } from '@vicons/ionicons5'
 import { onMounted, ref, watch } from 'vue'
 import { isDark, toggleDark } from '../composables'
-import { getList, getListCount, getProducers, setProducers } from '../api'
+import { getList, getProducers, setProducers } from '../api'
 import type { Picture, Producer } from '../types'
 import Pic from './Pic.vue'
+
+const limit = 20
 
 const message = useMessage()
 
 const producers = ref<Producer[]>([])
 const currentProducer = ref<string|undefined>(undefined)
 const producerOptions = ref<SelectOption[]>([])
-
 const imageList = ref<Picture[]>([])
+const producer = ref({
+  keyword: '',
+  uid: '',
+})
+const showModal = ref<boolean>(false)
 
-const limit = 20
-
-function handleFetch() {
-  getProducers().then((res) => {
-    producers.value = res
-  })
-}
 function hanlePickProducer(producer: string) {
   currentProducer.value = producer
   // fetch image list
   handleFetchList()
 }
-const producer = ref({
-  keyword: '',
-  uid: '',
-})
-
-const showModal = ref<boolean>(false)
-function handleAddProducer() {
-  setProducers(producer.value).then((res) => {
-    if (res === true) {
-      message.success('又多了一个瑟瑟生产机')
-      handleFetch()
-    }
-    else { message.error('不可以瑟瑟') }
-  })
+async function handleFetch() {
+  producers.value = await getProducers()
+}
+async function handleAddProducer() {
+  const res = await setProducers(producer.value)
+  if (res === true) {
+    message.success('又多了一个瑟瑟生产机')
+    handleFetch()
+  }
+  else { message.error('不可以瑟瑟') }
   showModal.value = false
 }
-function handleFetchList() {
-  getList(currentProducer.value).then((res) => {
-    imageList.value = res
-  })
+async function handleFetchList() {
+  imageList.value = await getList(currentProducer.value, limit)
 }
-function handleLoadMore() {
-  getList(currentProducer.value, limit, imageList.value.length).then((res) => {
-    imageList.value = imageList.value.concat(res)
-  })
+async function handleLoadMore() {
+  const res = await getList(currentProducer.value, limit, imageList.value.length)
+  imageList.value = imageList.value.concat(res)
 }
 
-onMounted(() => {
-  getProducers().then((res) => {
-    producers.value = res
-  })
+onMounted(async() => {
+  producers.value = await getProducers()
   handleFetchList()
 })
 
@@ -131,10 +121,10 @@ watch(
             size="medium"
           >
             <n-form-item label="Weibo UID">
-              <n-input v-model:value="producer.uid" placeholder="输入 UID" />
+              <n-input v-model:value="producer.uid" placeholder="UID" />
             </n-form-item>
             <n-form-item label="瑟瑟密码">
-              <n-input v-model:value="producer.keyword" placeholder="输入 关键词" />
+              <n-input v-model:value="producer.keyword" placeholder="关键词" />
             </n-form-item>
           </n-form>
         </div>
