@@ -1,7 +1,7 @@
 import { useFetch } from '@vueuse/core'
 import type { PicInfo, Producer, ProducerAdd } from '../types/index'
 
-const baseUrl = import.meta.env.VITE_API_HOSTNAME || 'http://awsl-py.dev.jcstaff.club'
+const baseUrl = import.meta.env.VITE_API_HOSTNAME
 
 function handleFetchError() {
   window.$message.error('不可以色色哟！')
