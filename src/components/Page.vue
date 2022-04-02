@@ -28,10 +28,10 @@ const limit = 20
 
 const message = useMessage()
 
-const producers = ref<Producer[]>([])
+const producers = ref<Producer[]|undefined>([])
 const currentProducer = ref<string|undefined>(undefined)
-const producerOptions = ref<SelectOption[]>([])
-const imageList = ref<Picture[]>([])
+const producerOptions = ref<SelectOption[]|undefined>([])
+const imageList = ref<Picture[]|undefined>([])
 const producer = ref({
   keyword: '',
   uid: '',
@@ -59,8 +59,8 @@ async function handleFetchList() {
   imageList.value = await getList(currentProducer.value, limit)
 }
 async function handleLoadMore() {
-  const res = await getList(currentProducer.value, limit, imageList.value.length)
-  imageList.value = imageList.value.concat(res)
+  const res = await getList(currentProducer.value, limit, imageList.value?.length)
+  imageList.value = imageList.value?.concat(res!)
 }
 
 onMounted(async() => {
@@ -69,9 +69,9 @@ onMounted(async() => {
 })
 
 watch(
-  () => producers.value.length,
+  () => producers.value?.length,
   () => {
-    producerOptions.value = producers.value.map(producer => ({
+    producerOptions.value = producers.value?.map(producer => ({
       label: producer.name,
       value: producer.uid,
     }))
@@ -138,7 +138,7 @@ watch(
       </n-modal>
     </n-layout-header>
     <n-layout-content>
-      <n-grid v-if="imageList.length!==0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" x-gap="3" y-gap="4" responsive="screen">
+      <n-grid v-if="imageList?.length!==0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" x-gap="3" y-gap="4" responsive="screen">
         <n-grid-item v-for="pic in imageList" :key="pic.pic_id">
           <Pic :pic-props="pic" />
         </n-grid-item>
@@ -147,7 +147,7 @@ watch(
         <n-empty description="😍瑟即是空呢" />
       </div>
     </n-layout-content>
-    <n-layout-footer v-if="imageList.length!==0">
+    <n-layout-footer v-if="imageList?.length!==0">
       <div class="loadmore">
         <n-button @click="handleLoadMore">
           <template #icon>

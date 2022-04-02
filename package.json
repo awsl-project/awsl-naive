@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^7.7.1",
+    "lyla": "^0.2.0",
     "vue": "^3.2.31"
   },
   "devDependencies": {

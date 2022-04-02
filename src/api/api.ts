@@ -1,5 +1,5 @@
-import { useFetch } from '@vueuse/core'
-import type { PicInfo, Producer, ProducerAdd } from '../types/index'
+import { lyla } from 'lyla'
+import type { Picture, Producer, ProducerAdd } from '../types/index'
 
 const baseUrl = import.meta.env.VITE_API_HOSTNAME
 
@@ -8,38 +8,53 @@ function handleFetchError() {
 }
 
 export async function getProducers() {
-  const { data, onFetchError } = await useFetch<Producer[] | null>(
-    `${baseUrl}/producers`,
-  ).get().json()
-  onFetchError(handleFetchError)
-  if (data !== null)
-    return data.value
+  try {
+    const { json: data } = await lyla.get<Producer[]>(`${baseUrl}/producers`)
+    return data
+  }
+  catch (e) {
+    handleFetchError()
+  }
 }
 
 export async function setProducers(producer: ProducerAdd) {
-  const { data } = await useFetch<boolean>(
-    `${baseUrl}/producers`,
-  ).post(
-    producer,
-  ).json()
-  if (data !== null)
-    return data.value
+  try {
+    const { json: data } = await lyla.post<boolean>(`${baseUrl}/producers`, {
+      json: JSON.stringify(producer),
+    })
+    return data
+  }
+  catch (e) {
+    handleFetchError()
+  }
 }
 
 export async function getList(uid?: string, limit?: number, offset?: number) {
-  const { data, onFetchError } = await useFetch<PicInfo[]>(
-    `${baseUrl}/v2/list?uid=${uid ?? ''}&limit=${limit ?? 10}&offset=${offset ?? 0}`,
-  ).get().json()
-  onFetchError(handleFetchError)
-  if (data !== null)
-    return data.value
+  try {
+    const { json: data } = await lyla.get<Picture[]>(`${baseUrl}/list`, {
+      query: {
+        uid: `${uid ?? ''}`,
+        limit: `${limit ?? 20}`,
+        pffset: `${offset ?? 0}`,
+      },
+    })
+    return data
+  }
+  catch (e) {
+    handleFetchError()
+  }
 }
 
 export async function getListCount(uid: string) {
-  const { data, onFetchError } = await useFetch<number>(
-    `${baseUrl}/v2/list/count?uid=${uid}`,
-  ).get().json()
-  onFetchError(handleFetchError)
-  if (data !== null)
-    return data.value
+  try {
+    const { json: data } = await lyla.get<number>(`${baseUrl}/list/count`, {
+      query: {
+        uid: `${uid}`,
+      },
+    })
+    return data
+  }
+  catch (e) {
+    handleFetchError()
+  }
 }
