@@ -19,8 +19,10 @@ export async function getProducers() {
 
 export async function setProducers(producer: ProducerAdd) {
   try {
-    const { json } = await lyla.post<boolean>(`${baseUrl}/producers`, {
-      json: JSON.stringify(producer),
+    const { json } = await lyla<boolean>({
+      method: 'post',
+      url: `${baseUrl}/producers`,
+      json: { ...producer },
     })
     return json
   }
