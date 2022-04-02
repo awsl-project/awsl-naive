@@ -9,8 +9,8 @@ function handleFetchError() {
 
 export async function getProducers() {
   try {
-    const { json: data } = await lyla.get<Producer[]>(`${baseUrl}/producers`)
-    return data
+    const { json } = await lyla.get<Producer[]>(`${baseUrl}/producers`)
+    return json
   }
   catch (e) {
     handleFetchError()
@@ -19,10 +19,10 @@ export async function getProducers() {
 
 export async function setProducers(producer: ProducerAdd) {
   try {
-    const { json: data } = await lyla.post<boolean>(`${baseUrl}/producers`, {
+    const { json } = await lyla.post<boolean>(`${baseUrl}/producers`, {
       json: JSON.stringify(producer),
     })
-    return data
+    return json
   }
   catch (e) {
     handleFetchError()
@@ -31,14 +31,14 @@ export async function setProducers(producer: ProducerAdd) {
 
 export async function getList(uid?: string, limit?: number, offset?: number) {
   try {
-    const { json: data } = await lyla.get<Picture[]>(`${baseUrl}/list`, {
+    const { json } = await lyla.get<Picture[]>(`${baseUrl}/list`, {
       query: {
         uid: `${uid ?? ''}`,
         limit: `${limit ?? 20}`,
         pffset: `${offset ?? 0}`,
       },
     })
-    return data
+    return json
   }
   catch (e) {
     handleFetchError()
@@ -47,12 +47,12 @@ export async function getList(uid?: string, limit?: number, offset?: number) {
 
 export async function getListCount(uid: string) {
   try {
-    const { json: data } = await lyla.get<number>(`${baseUrl}/list/count`, {
+    const { json } = await lyla.get<number>(`${baseUrl}/list/count`, {
       query: {
         uid: `${uid}`,
       },
     })
-    return data
+    return json
   }
   catch (e) {
     handleFetchError()
