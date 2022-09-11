@@ -6,15 +6,5 @@ window.$message = useMessage()
 </script>
 
 <template>
-  <div class="page">
-    <Page />
-  </div>
+  <Page />
 </template>
-
-<style>
-.page{
-  height: 100vh;
-  width: 100vw;
-}
-</style>
-

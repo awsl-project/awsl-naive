@@ -3,9 +3,11 @@ import { computed } from 'vue'
 import {
   NConfigProvider,
   NDialogProvider,
+  NLayout,
   NLoadingBarProvider,
   NMessageProvider,
   NNotificationProvider,
+  NScrollbar,
   darkTheme,
 } from 'naive-ui'
 import PageHeader from './pages/PageHeader.vue'
@@ -20,8 +22,13 @@ const getDarkTheme = computed(() => isDark.value ? darkTheme : undefined)
       <NMessageProvider>
         <NNotificationProvider>
           <NDialogProvider>
-            <PageHeader />
-            <RouterView />
+            <NLayout
+              style="height: 100vh"
+              :native-scrollbar="false"
+            >
+              <PageHeader />
+              <RouterView />
+            </NLayout>
           </NDialogProvider>
         </NNotificationProvider>
       </NMessageProvider>

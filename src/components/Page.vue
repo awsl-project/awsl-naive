@@ -2,20 +2,18 @@
 import {
   NBackTop,
   NButton,
-  NButtonGroup,
   NGrid,
   NLayout,
   NLayoutContent,
   NLayoutHeader,
   NSpace,
-  NThing,
   useMessage,
 } from 'naive-ui'
 import type { SelectOption } from 'naive-ui'
 import {
   AddOutline,
   ArrowDownCircleOutline,
-  EnterOutline,
+  CloudUpload,
 } from '@vicons/ionicons5'
 import { onMounted, ref, watch } from 'vue'
 import { getList, getProducers, setProducers } from '../api'
@@ -47,10 +45,10 @@ async function handleFetch() {
 async function handleAddProducer() {
   const res = await setProducers(producer.value)
   if (res === true) {
-    message.success('又多了一个瑟瑟生产机')
+    message.success('添加成功')
     handleFetch()
   }
-  else { message.error('不可以瑟瑟') }
+  else { message.error('失败，请重试') }
   showModal.value = false
 }
 async function handleFetchList() {
@@ -78,7 +76,7 @@ watch(
 </script>
 
 <template>
-  <NLayout style="height: 100%" :native-scrollbar="false">
+  <NLayout>
     <NLayoutHeader>
       <NSpace justify="center">
         <div style="width: 240px">
@@ -96,7 +94,7 @@ watch(
       </NSpace>
       <n-modal v-model:show="showModal" preset="dialog" title="Dialog">
         <template #header>
-          <div>瑟瑟生产机</div>
+          添加你喜欢的博主
         </template>
         <div>
           <n-form
@@ -108,15 +106,16 @@ watch(
             <n-form-item label="Weibo UID">
               <n-input v-model:value="producer.uid" placeholder="UID" />
             </n-form-item>
-            <n-form-item label="瑟瑟密码">
+            <n-form-item label="关键词">
               <n-input v-model:value="producer.keyword" placeholder="关键词" />
             </n-form-item>
           </n-form>
         </div>
         <template #action>
           <NButton @click="handleAddProducer">
+            提交
             <template #icon>
-              <n-icon :component="EnterOutline" />
+              <n-icon :component="CloudUpload" />
             </template>
           </NButton>
         </template>
@@ -129,7 +128,7 @@ watch(
         </n-grid-item>
       </NGrid>
       <div v-else>
-        <n-empty description="😍瑟即是空呢" />
+        <n-empty description="暂无数据" />
       </div>
     </NLayoutContent>
     <n-layout-footer v-if="imageList?.length !== 0">
