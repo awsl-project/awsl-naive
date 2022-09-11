@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { useMessage } from 'naive-ui'
-import Page from './Page.vue'
+import Page from '../components/Page.vue'
 
 window.$message = useMessage()
 </script>
+
 <template>
   <div class="page">
     <Page />
@@ -16,3 +17,4 @@ window.$message = useMessage()
   width: 100vw;
 }
 </style>
+

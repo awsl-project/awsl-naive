@@ -13,15 +13,15 @@ const footerStyle = {
 </script>
 
 <template>
-  <n-card segmented :footer-style="footerStyle">
+  <NCard segmented :footer-style="footerStyle">
     <template #cover>
-      <n-image
+      <NImage
         :preview-src="picProps.pic_info.original.url "
         :src="picProps.pic_info.large.url"
       />
     </template>
     <template #footer>
-      <n-button
+      <NButton
         text
         tag="a"
         :href="picProps.wb_url"
@@ -29,10 +29,10 @@ const footerStyle = {
         width="100%"
       >
         <template #icon>
-          <n-icon :component="WeiboOutlined" />
+          <NIcon :component="WeiboOutlined" />
         </template>
         查看原微博
-      </n-button>
+      </NButton>
     </template>
-  </n-card>
+  </NCard>
 </template>

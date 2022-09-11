@@ -4,25 +4,25 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --mode development",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
+    "build": "vite build",
     "lint": "eslint \"**/*.{vue,ts,js}\""
   },
   "dependencies": {
-    "@vueuse/core": "^7.7.1",
-    "lyla": "^0.2.0",
-    "vue": "^3.2.31"
+    "@vueuse/core": "^9.2.0",
+    "lyla": "^0.6.8",
+    "vue": "^3.2.39",
+    "vue-router": "^4.1.5"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.18.9",
+    "@antfu/eslint-config": "^0.26.3",
     "@vicons/antd": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
-    "@vitejs/plugin-vue": "^2.3.1",
-    "eslint": "^8.12.0",
-    "naive-ui": "^2.27.0",
-    "typescript": "^4.6.3",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "eslint": "^8.23.0",
+    "naive-ui": "^2.33.2",
+    "typescript": "^4.8.3",
     "vfonts": "^0.0.3",
-    "vite": "^2.9.1",
-    "vue-tsc": "^0.29.8"
+    "vite": "^3.1.0",
+    "vue-tsc": "^0.40.13"
   }
 }
