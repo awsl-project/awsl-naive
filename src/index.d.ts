@@ -1,3 +1,5 @@
+/// <reference types="@types/web-bluetooth" />
+
 export {}
 
 declare global {
