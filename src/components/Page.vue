@@ -76,73 +76,71 @@ watch(
 </script>
 
 <template>
-  <NLayout>
-    <NLayoutHeader>
-      <NSpace justify="center">
-        <div style="width: 240px">
-          <n-select
-            placeholder="就你辣"
-            :options="producerOptions"
-            @update:value="hanlePickProducer"
-          />
-        </div>
-        <NButton @click="showModal = true">
+  <NLayoutHeader>
+    <NSpace justify="center">
+      <div style="width: 240px">
+        <n-select
+          placeholder="就你辣"
+          :options="producerOptions"
+          @update:value="hanlePickProducer"
+        />
+      </div>
+      <NButton @click="showModal = true">
+        <template #icon>
+          <n-icon :component="AddOutline" />
+        </template>
+      </NButton>
+    </NSpace>
+    <n-modal v-model:show="showModal" preset="dialog" title="Dialog">
+      <template #header>
+        添加你喜欢的博主
+      </template>
+      <div>
+        <n-form
+          ref="formRef"
+          :label-width="80"
+          :model="producer"
+          size="medium"
+        >
+          <n-form-item label="Weibo UID">
+            <n-input v-model:value="producer.uid" placeholder="UID" />
+          </n-form-item>
+          <n-form-item label="关键词">
+            <n-input v-model:value="producer.keyword" placeholder="关键词" />
+          </n-form-item>
+        </n-form>
+      </div>
+      <template #action>
+        <NButton @click="handleAddProducer">
+          提交
           <template #icon>
-            <n-icon :component="AddOutline" />
+            <n-icon :component="CloudUpload" />
           </template>
         </NButton>
-      </NSpace>
-      <n-modal v-model:show="showModal" preset="dialog" title="Dialog">
-        <template #header>
-          添加你喜欢的博主
+      </template>
+    </n-modal>
+  </NLayoutHeader>
+  <NLayoutContent>
+    <NGrid v-if="imageList?.length !== 0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" x-gap="3" y-gap="4" responsive="screen">
+      <n-grid-item v-for="pic in imageList" :key="pic.pic_id">
+        <Pic :pic-props="pic" />
+      </n-grid-item>
+    </NGrid>
+    <div v-else>
+      <n-empty description="暂无数据" />
+    </div>
+  </NLayoutContent>
+  <n-layout-footer v-if="imageList?.length !== 0">
+    <div class="loadmore">
+      <NButton @click="handleLoadMore">
+        <template #icon>
+          <n-icon :component="ArrowDownCircleOutline" />
         </template>
-        <div>
-          <n-form
-            ref="formRef"
-            :label-width="80"
-            :model="producer"
-            size="medium"
-          >
-            <n-form-item label="Weibo UID">
-              <n-input v-model:value="producer.uid" placeholder="UID" />
-            </n-form-item>
-            <n-form-item label="关键词">
-              <n-input v-model:value="producer.keyword" placeholder="关键词" />
-            </n-form-item>
-          </n-form>
-        </div>
-        <template #action>
-          <NButton @click="handleAddProducer">
-            提交
-            <template #icon>
-              <n-icon :component="CloudUpload" />
-            </template>
-          </NButton>
-        </template>
-      </n-modal>
-    </NLayoutHeader>
-    <NLayoutContent>
-      <NGrid v-if="imageList?.length !== 0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" x-gap="3" y-gap="4" responsive="screen">
-        <n-grid-item v-for="pic in imageList" :key="pic.pic_id">
-          <Pic :pic-props="pic" />
-        </n-grid-item>
-      </NGrid>
-      <div v-else>
-        <n-empty description="暂无数据" />
-      </div>
-    </NLayoutContent>
-    <n-layout-footer v-if="imageList?.length !== 0">
-      <div class="loadmore">
-        <NButton @click="handleLoadMore">
-          <template #icon>
-            <n-icon :component="ArrowDownCircleOutline" />
-          </template>
-          还要更多
-        </NButton>
-      </div>
-    </n-layout-footer>
-    <NBackTop :right="50" />
-  </NLayout>
+        还要更多
+      </NButton>
+    </div>
+  </n-layout-footer>
+  <NBackTop :right="50" />
 </template>
 
 <style>
