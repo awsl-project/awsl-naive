@@ -37,7 +37,7 @@ export async function getList(uid?: string, limit?: number, offset?: number) {
       query: {
         uid: `${uid ?? ''}`,
         limit: `${limit ?? 20}`,
-        pffset: `${offset ?? 0}`,
+        offset: `${offset ?? 0}`,
       },
     })
     return json
