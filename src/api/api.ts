@@ -33,7 +33,7 @@ export async function setProducers(producer: ProducerAdd) {
 
 export async function getList(uid?: string, limit?: number, offset?: number) {
   try {
-    const { json } = await lyla.get<Picture[]>(`${baseUrl}/list`, {
+    const { json } = await lyla.get<Picture[]>(`${baseUrl}/v2/list`, {
       query: {
         uid: `${uid ?? ''}`,
         limit: `${limit ?? 20}`,
@@ -49,7 +49,7 @@ export async function getList(uid?: string, limit?: number, offset?: number) {
 
 export async function getListCount(uid: string) {
   try {
-    const { json } = await lyla.get<number>(`${baseUrl}/list/count`, {
+    const { json } = await lyla.get<number>(`${baseUrl}/v2/list/count`, {
       query: {
         uid: `${uid}`,
       },
