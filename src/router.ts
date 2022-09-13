@@ -1,17 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
+import Feed from './pages/Feed.vue'
+import About from './pages/About.vue'
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: '/',
       name: 'Home',
-      component: () => import('./pages/Feed.vue'),
+      component: Feed,
     },
     {
       path: '/about',
       name: 'About',
-      component: () => import('./pages/About.vue'),
+      component: About,
     },
   ],
 })
