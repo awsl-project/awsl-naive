@@ -2,7 +2,7 @@
 import { h, ref } from 'vue'
 import type { Component } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
-import { NAvatar, NIcon, NLayout, NPageHeader, NSpace, NTab, NTabPane, NTabs, useMessage } from 'naive-ui'
+import { NAvatar, NIcon, NLayout, NPageHeader, NSpace } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import {
   Home,
@@ -84,4 +84,3 @@ function handleBack() {
     </n-layout-header>
   </NLayout>
 </template>
-

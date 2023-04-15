@@ -7,7 +7,6 @@ import {
   NLoadingBarProvider,
   NMessageProvider,
   NNotificationProvider,
-  NScrollbar,
   darkTheme,
 } from 'naive-ui'
 import PageHeader from './pages/PageHeader.vue'

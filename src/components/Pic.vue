@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NButton, NCard, NIcon, NImage } from 'naive-ui'
 import { WeiboOutlined } from '@vicons/antd'
-import type { PicInfo, Picture } from '../types'
+import type { Picture } from '../types'
 
 defineProps<{ picProps: Picture }>()
 

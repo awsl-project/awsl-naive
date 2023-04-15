@@ -3,7 +3,6 @@ import {
   NBackTop,
   NButton,
   NGrid,
-  NLayout,
   NLayoutContent,
   NLayoutHeader,
   NSpace,
@@ -97,7 +96,6 @@ watch(
       </template>
       <div>
         <n-form
-          ref="formRef"
           :label-width="80"
           :model="producer"
           size="medium"
