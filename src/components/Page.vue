@@ -2,7 +2,6 @@
 import {
   NBackTop,
   NButton,
-  NGrid,
   NLayoutContent,
   NLayoutHeader,
   NSpace,
@@ -119,13 +118,12 @@ watch(
     </n-modal>
   </NLayoutHeader>
   <NLayoutContent>
-    <NGrid v-if="imageList?.length !== 0" cols="2 s:3 m:4 l:5 xl:6 2xl:7" x-gap="3" y-gap="4" responsive="screen">
-      <n-grid-item v-for="pic in imageList" :key="pic.pic_id">
+    <div class="waterfall-container">
+      <div v-if="imageList?.length !== 0" v-for="pic in imageList" :key="pic.pic_id" class="waterfall-item">
+      <!-- 根据实际情况展示对应的内容 -->
         <Pic :pic-props="pic" />
-      </n-grid-item>
-    </NGrid>
-    <div v-else>
-      <n-empty description="暂无数据" />
+      </div>
+      <n-empty v-else description="暂无数据" />
     </div>
   </NLayoutContent>
   <n-layout-footer v-if="imageList?.length !== 0">
@@ -142,6 +140,27 @@ watch(
 </template>
 
 <style>
+.waterfall-container {
+  column-gap: 10px;
+  column-count: 2;
+}
+
+.waterfall-item {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .waterfall-container {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1024px) {
+  .waterfall-container {
+    column-count: 6;
+  }
+}
+
 .loadmore{
   margin: 5px;
   display: flex;
