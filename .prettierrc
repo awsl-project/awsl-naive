@@ -1,0 +1,8 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 80,
+  "proseWrap": "never",
+  "tabWidth": 2,
+  "arrowParens": "avoid"
+}
