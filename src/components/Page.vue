@@ -118,10 +118,10 @@ watch(
     </n-modal>
   </NLayoutHeader>
   <NLayoutContent>
-    <div  v-if="imageList?.length !== 0"  class="waterfall-container">
-      <div v-for="pic in imageList" :key="pic.pic_id"  >
-        <Pic :pic-props="pic" class="waterfall-item"/>
-      </div> 
+    <div v-if="imageList?.length !== 0" class="waterfall-container">
+      <div v-for="pic in imageList" :key="pic.pic_id">
+        <Pic :pic-props="pic" class="waterfall-item" />
+      </div>
     </div>
     <n-empty v-else description="暂无数据" />
   </NLayoutContent>
