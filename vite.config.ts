@@ -1,4 +1,4 @@
-import { setDefaultResultOrder } from 'dns'
+import { setDefaultResultOrder } from 'node:dns'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
