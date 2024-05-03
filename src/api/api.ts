@@ -1,4 +1,4 @@
-import { lyla } from 'lyla'
+import { lyla } from '@lylajs/web'
 import type { Picture, Producer, ProducerAdd } from '../types/index'
 
 const baseUrl = import.meta.env.VITE_API_HOSTNAME
