@@ -4,7 +4,7 @@ import type { Component } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { NAvatar, NIcon, NLayout, NPageHeader, NSpace } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
-import { Home, Moon, People, Sunny } from '@vicons/ionicons5'
+import { Home, Moon, People, Pricetags, Sunny } from '@vicons/ionicons5'
 import { isDark, toggleDark } from '../composables'
 
 const router = useRouter()
@@ -37,6 +37,20 @@ const menuOptions: MenuOption[] = [
       ),
     key: 'go-about',
     icon: renderIcon(People),
+  },
+  {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: {
+            name: 'Bloggers',
+          },
+        },
+        { default: () => '博主' },
+      ),
+    key: 'go-bloggers',
+    icon: renderIcon(Pricetags),
   },
 ]
 
