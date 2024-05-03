@@ -20,13 +20,25 @@ import { members } from '../data/members'
       <template #description>
         <div flex flex-row gap-3>
           <div v-for="link in member.links" :key="link.url">
-            <a v-if="link.name === 'twitter'" :href="link.url" target="_blank">
-              <div class="i-mdi-twitter text-xl dark:bg-white" cursor-pointer />
+            <a
+              v-if="link.name === 'twitter'"
+              :href="link.url"
+              target="_blank"
+              decoration-none
+              color-inherit
+            >
+              <div
+                class="i-mdi-twitter text-xl dark:bg-white"
+                dark
+                cursor-pointer
+              />
             </a>
             <a
               v-else-if="link.name === 'github'"
               :href="link.url"
               target="_blank"
+              decoration-none
+              color-inherit
             >
               <div class="i-mdi-github text-xl dark:bg-white" cursor-pointer />
             </a>
@@ -37,6 +49,8 @@ import { members } from '../data/members'
               op50
               hover="op80"
               dark="bg-white"
+              decoration-none
+              color-inherit
             >
               <div class="i-mdi-discord text-xl dark:bg-white" cursor-pointer />
             </a>
