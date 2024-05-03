@@ -4,12 +4,7 @@ import type { Component } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { NAvatar, NIcon, NLayout, NPageHeader, NSpace } from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
-import {
-  Home,
-  Moon,
-  People,
-  Sunny,
-} from '@vicons/ionicons5'
+import { Home, Moon, People, Sunny } from '@vicons/ionicons5'
 import { isDark, toggleDark } from '../composables'
 
 const router = useRouter()
@@ -57,18 +52,18 @@ function handleBack() {
 <template>
   <NLayout>
     <n-layout-header>
-      <NPageHeader @back="handleBack">
+      <NPageHeader m-3 @back="handleBack">
         <template #avatar>
           <NSpace>
-            <NAvatar
-              round
-              size="medium"
-              src="/awsl.png"
-            />
+            <NAvatar round size="medium" src="/awsl.png" />
           </NSpace>
         </template>
         <template #title>
-          <NMenu v-model:value="activeKey" mode="horizontal" :options="menuOptions" />
+          <NMenu
+            v-model:value="activeKey"
+            mode="horizontal"
+            :options="menuOptions"
+          />
         </template>
         <template #extra>
           <NSpace>

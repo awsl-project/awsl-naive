@@ -18,8 +18,10 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.16.1",
+    "@iconify-json/mdi": "^1.1.66",
     "@types/node": "^20.12.8",
     "@types/web-bluetooth": "^0.0.20",
+    "@unocss/preset-uno": "^0.59.4",
     "@vicons/antd": "^0.12.0",
     "@vicons/ionicons5": "^0.12.0",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -29,6 +31,7 @@
     "naive-ui": "^2.38.1",
     "prettier": "3.2.5",
     "typescript": "^5.4.5",
+    "unocss": "^0.59.4",
     "vfonts": "^0.0.3",
     "vite": "^5.2.11",
     "vue-tsc": "^2.0.16"

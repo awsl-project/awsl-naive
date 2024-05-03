@@ -46,14 +46,20 @@ async function handleAddProducer() {
     message.success('添加成功')
     handleFetch()
   }
-  else { message.error('失败，请重试') }
+  else {
+    message.error('失败，请重试')
+  }
   showModal.value = false
 }
 async function handleFetchList() {
   imageList.value = await getList(currentProducer.value, limit)
 }
 async function handleLoadMore() {
-  const res = await getList(currentProducer.value, limit, imageList.value?.length)
+  const res = await getList(
+    currentProducer.value,
+    limit,
+    imageList.value?.length,
+  )
   imageList.value = imageList.value?.concat(res!)
 }
 
@@ -74,9 +80,9 @@ watch(
 </script>
 
 <template>
-  <NLayoutHeader>
+  <NLayoutHeader mb-3>
     <NSpace justify="center">
-      <div style="width: 240px">
+      <div w-80>
         <n-select
           placeholder="就你辣"
           :options="producerOptions"
@@ -94,11 +100,7 @@ watch(
         添加你喜欢的博主
       </template>
       <div>
-        <n-form
-          :label-width="80"
-          :model="producer"
-          size="medium"
-        >
+        <n-form :label-width="80" :model="producer" size="medium">
           <n-form-item label="Weibo UID">
             <n-input v-model:value="producer.uid" placeholder="UID" />
           </n-form-item>
@@ -160,7 +162,7 @@ watch(
   }
 }
 
-.loadmore{
+.loadmore {
   margin: 5px;
   display: flex;
   justify-content: center;
