@@ -77,6 +77,7 @@ function handleBack() {
             v-model:value="activeKey"
             mode="horizontal"
             :options="menuOptions"
+            responsive
           />
         </template>
         <template #extra>
