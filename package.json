@@ -13,7 +13,6 @@
   "dependencies": {
     "@lylajs/web": "^1.12.0",
     "@vueuse/core": "^10.9.0",
-    "lyla": "^1.11.0",
     "vue": "^3.4.26",
     "vue-router": "^4.3.2"
   },
