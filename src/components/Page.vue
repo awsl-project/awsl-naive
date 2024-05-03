@@ -32,6 +32,8 @@ const producer = ref({
 })
 const showModal = ref<boolean>(false)
 
+const loading = ref<boolean>(false)
+
 function hanlePickProducer(producer: string) {
   currentProducer.value = producer
   // fetch image list
@@ -52,7 +54,9 @@ async function handleAddProducer() {
   showModal.value = false
 }
 async function handleFetchList() {
+  loading.value = true
   imageList.value = await getList(currentProducer.value, limit)
+  loading.value = false
 }
 async function handleLoadMore() {
   const res = await getList(
@@ -120,12 +124,13 @@ watch(
     </n-modal>
   </NLayoutHeader>
   <NLayoutContent>
-    <div v-if="imageList?.length !== 0" class="waterfall-container">
+    <n-empty v-if="imageList?.length === 0" description="暂无数据" />
+    <div v-if="!loading" class="waterfall-container">
       <div v-for="pic in imageList" :key="pic.pic_id">
         <Pic :pic-props="pic" class="waterfall-item" />
       </div>
     </div>
-    <n-empty v-else description="暂无数据" />
+    <n-spin v-else size="large" flex justify-center aligin-center />
   </NLayoutContent>
   <n-layout-footer v-if="imageList?.length !== 0">
     <div class="loadmore">
