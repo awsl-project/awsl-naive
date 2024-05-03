@@ -5,7 +5,7 @@ import { members } from '../data/members'
 
 <template>
   <NCard w-80 m-3 rouded-lg>
-    <NThing v-for="(member, index) in members" :key="index">
+    <NThing v-for="member in members" :key="member.name">
       <template #avatar>
         <NAvatar
           round
@@ -15,7 +15,7 @@ import { members } from '../data/members'
         />
       </template>
       <template #header>
-        <span class="member-name">{{ member.name }}</span>
+        <span text-xl fw-500>{{ member.name }}</span>
       </template>
       <template #description>
         <div flex flex-row gap-3>
@@ -46,10 +46,3 @@ import { members } from '../data/members'
     </NThing>
   </NCard>
 </template>
-
-<style>
-.member-name {
-  font-size: 1.2em;
-  font-weight: 500;
-}
-</style>
