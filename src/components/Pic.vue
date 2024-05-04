@@ -3,7 +3,7 @@ import { NButton, NCard, NIcon, NImage } from 'naive-ui'
 import { WeiboOutlined } from '@vicons/antd'
 import type { Picture } from '../types'
 
-defineProps<{ picProps: Picture }>()
+defineProps<{ props: Picture }>()
 
 const footerStyle = {
   display: 'flex',
@@ -16,18 +16,12 @@ const footerStyle = {
   <NCard segmented :footer-style="footerStyle">
     <template #cover>
       <NImage
-        :preview-src="picProps.pic_info.original.url "
-        :src="picProps.pic_info.large.url"
+        :preview-src="props.picInfo.original.url"
+        :src="props.picInfo.large.url"
       />
     </template>
     <template #footer>
-      <NButton
-        text
-        tag="a"
-        :href="picProps.wb_url"
-        target="_blank"
-        width="100%"
-      >
+      <NButton text tag="a" :href="props.wbUrl" target="_blank" width="100%">
         <template #icon>
           <NIcon :component="WeiboOutlined" />
         </template>

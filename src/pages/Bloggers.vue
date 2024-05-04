@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { NEmpty, NSpin } from 'naive-ui'
-import type { Producer } from '../types'
-import { getProducers } from '../api'
+import type { Blogger } from '../types'
+import { getBloggers } from '../api'
 
-const bloggers = ref<Producer[] | undefined>([])
+const bloggers = ref<Blogger[] | undefined>([])
 const loading = ref<boolean>(false)
 
 function getRandomTagType() {
@@ -14,7 +14,7 @@ function getRandomTagType() {
 
 async function handleFetch() {
   loading.value = true
-  bloggers.value = await getProducers()
+  bloggers.value = await getBloggers()
   loading.value = false
 }
 

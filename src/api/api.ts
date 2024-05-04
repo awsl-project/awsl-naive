@@ -1,5 +1,6 @@
 import { lyla } from '@lylajs/web'
-import type { Picture, Producer, ProducerAdd } from '../types/index'
+import type { Blogger, BloggerAdd, Picture } from '../types/index'
+import { deepCamelCaseKeys } from './utils'
 
 const baseUrl = import.meta.env.VITE_API_HOSTNAME
 
@@ -7,24 +8,24 @@ function handleFetchError() {
   window.$message.error('不可以色色哟！')
 }
 
-export async function getProducers() {
+export async function getBloggers() {
   try {
-    const { json } = await lyla.get<Producer[]>(`${baseUrl}/producers`)
-    return json
+    const { json } = await lyla.get<Blogger[]>(`${baseUrl}/producers`)
+    return deepCamelCaseKeys(json)
   }
   catch (e) {
     handleFetchError()
   }
 }
 
-export async function setProducers(producer: ProducerAdd) {
+export async function setBloggers(blogger: BloggerAdd) {
   try {
     const { json } = await lyla<boolean>({
       method: 'post',
       url: `${baseUrl}/producers`,
-      json: { ...producer },
+      json: { ...blogger },
     })
-    return json
+    return deepCamelCaseKeys(json)
   }
   catch (e) {
     handleFetchError()
@@ -40,7 +41,7 @@ export async function getList(uid?: string, limit?: number, offset?: number) {
         offset: `${offset ?? 0}`,
       },
     })
-    return json
+    return deepCamelCaseKeys(json)
   }
   catch (e) {
     handleFetchError()
@@ -54,7 +55,7 @@ export async function getListCount(uid: string) {
         uid: `${uid}`,
       },
     })
-    return json
+    return deepCamelCaseKeys(json)
   }
   catch (e) {
     handleFetchError()

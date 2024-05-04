@@ -14,19 +14,19 @@ import {
   CloudUpload,
 } from '@vicons/ionicons5'
 import { onMounted, ref, watch } from 'vue'
-import { getList, getProducers, setProducers } from '../api'
-import type { Picture, Producer } from '../types'
+import { getBloggers, getList, setBloggers } from '../api'
+import type { Blogger, Picture } from '../types'
 import Pic from './Pic.vue'
 
 const limit = 20
 
 const message = useMessage()
 
-const producers = ref<Producer[] | undefined>([])
-const currentProducer = ref<string | undefined>(undefined)
-const producerOptions = ref<SelectOption[] | undefined>([])
+const bloggers = ref<Blogger[] | undefined>([])
+const currentBlogger = ref<string | undefined>(undefined)
+const bloggerOptions = ref<SelectOption[] | undefined>([])
 const imageList = ref<Picture[] | undefined>([])
-const producer = ref({
+const blogger = ref({
   keyword: '',
   uid: '',
 })
@@ -35,15 +35,15 @@ const showModal = ref<boolean>(false)
 const loading = ref<boolean>(false)
 
 function hanlePickProducer(producer: string) {
-  currentProducer.value = producer
+  currentBlogger.value = producer
   // fetch image list
   handleFetchList()
 }
 async function handleFetch() {
-  producers.value = await getProducers()
+  bloggers.value = await getBloggers()
 }
 async function handleAddProducer() {
-  const res = await setProducers(producer.value)
+  const res = await setBloggers(blogger.value)
   if (res === true) {
     message.success('添加成功')
     handleFetch()
@@ -55,12 +55,12 @@ async function handleAddProducer() {
 }
 async function handleFetchList() {
   loading.value = true
-  imageList.value = await getList(currentProducer.value, limit)
+  imageList.value = await getList(currentBlogger.value, limit)
   loading.value = false
 }
 async function handleLoadMore() {
   const res = await getList(
-    currentProducer.value,
+    currentBlogger.value,
     limit,
     imageList.value?.length,
   )
@@ -68,14 +68,14 @@ async function handleLoadMore() {
 }
 
 onMounted(async () => {
-  producers.value = await getProducers()
+  bloggers.value = await getBloggers()
   handleFetchList()
 })
 
 watch(
-  () => producers.value?.length,
+  () => bloggers.value?.length,
   () => {
-    producerOptions.value = producers.value?.map(producer => ({
+    bloggerOptions.value = bloggers.value?.map(producer => ({
       label: producer.name,
       value: producer.uid,
     }))
@@ -89,7 +89,7 @@ watch(
       <div w-80>
         <n-select
           placeholder="就你辣"
-          :options="producerOptions"
+          :options="bloggerOptions"
           @update:value="hanlePickProducer"
         />
       </div>
@@ -104,12 +104,12 @@ watch(
         添加你喜欢的博主
       </template>
       <div>
-        <n-form :label-width="80" :model="producer" size="medium">
+        <n-form :label-width="80" :model="blogger" size="medium">
           <n-form-item label="Weibo UID">
-            <n-input v-model:value="producer.uid" placeholder="UID" />
+            <n-input v-model:value="blogger.uid" placeholder="UID" />
           </n-form-item>
           <n-form-item label="关键词">
-            <n-input v-model:value="producer.keyword" placeholder="关键词" />
+            <n-input v-model:value="blogger.keyword" placeholder="关键词" />
           </n-form-item>
         </n-form>
       </div>
@@ -126,8 +126,8 @@ watch(
   <NLayoutContent>
     <n-empty v-if="imageList?.length === 0" description="暂无数据" />
     <div v-if="!loading" class="waterfall-container">
-      <div v-for="pic in imageList" :key="pic.pic_id">
-        <Pic :pic-props="pic" class="waterfall-item" />
+      <div v-for="pic in imageList" :key="pic.picId">
+        <Pic :props="pic" class="waterfall-item" />
       </div>
     </div>
     <n-spin v-else size="large" flex justify-center aligin-center />

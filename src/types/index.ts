@@ -1,9 +1,9 @@
-export interface Producer {
+export interface Blogger {
   uid: string
   name: string
 }
 
-export interface ProducerAdd {
+export interface BloggerAdd {
   uid: string
   keyword: string
 }
@@ -15,9 +15,9 @@ export interface PicInfo {
 }
 
 export interface Picture {
-  pic_id: string
-  wb_url: string
-  pic_info: {
+  picId: string
+  wbUrl: string
+  picInfo: {
     thumbnail?: PicInfo
     bmiddle?: PicInfo
     large: PicInfo
