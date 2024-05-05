@@ -11,7 +11,7 @@ function handleFetchError() {
 export async function getBloggers() {
   try {
     const { json } = await lyla.get<Blogger[]>(`${baseUrl}/producers`)
-    return deepCamelCaseKeys(json)
+    return deepCamelCaseKeys(json) satisfies Blogger[]
   }
   catch (e) {
     handleFetchError()
@@ -25,7 +25,7 @@ export async function setBloggers(blogger: BloggerAdd) {
       url: `${baseUrl}/producers`,
       json: { ...blogger },
     })
-    return deepCamelCaseKeys(json)
+    return deepCamelCaseKeys(json) satisfies boolean
   }
   catch (e) {
     handleFetchError()
@@ -41,7 +41,7 @@ export async function getList(uid?: string, limit?: number, offset?: number) {
         offset: `${offset ?? 0}`,
       },
     })
-    return deepCamelCaseKeys(json)
+    return deepCamelCaseKeys(json) satisfies Picture[]
   }
   catch (e) {
     handleFetchError()
@@ -55,7 +55,7 @@ export async function getListCount(uid: string) {
         uid: `${uid}`,
       },
     })
-    return deepCamelCaseKeys(json)
+    return deepCamelCaseKeys(json) satisfies number
   }
   catch (e) {
     handleFetchError()

@@ -64,7 +64,9 @@ async function handleLoadMore() {
     limit,
     imageList.value?.length,
   )
-  imageList.value = imageList.value?.concat(res!)
+  if (!res)
+    return []
+  imageList.value?.push(res)
 }
 
 onMounted(async () => {
