@@ -66,7 +66,8 @@ async function handleLoadMore() {
   )
   if (!res)
     return []
-  imageList.value?.push(res)
+  // merge list
+  imageList.value?.push(...res)
 }
 
 onMounted(async () => {
